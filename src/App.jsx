@@ -5,27 +5,28 @@ import { DndProvider, useDrag } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 const generateRounds = (athleteCount) => {
-  const initialSeeds = Array.from({ length: athleteCount / 2 }, (_, index) => ({
+  let rounds = [];
+  let seeds = Array.from({ length: athleteCount / 2 }, (_, index) => ({
     id: index + 1,
     teams: [null, null],
   }));
 
-  return [
-    { seeds: initialSeeds },
-    {
-      seeds: Array(initialSeeds.length / 2).fill({
-        id: null,
-        teams: [null, null],
-      }),
-    },
-    {
-      seeds: Array(initialSeeds.length / 4).fill({
-        id: null,
-        teams: [null, null],
-      }),
-    },
-    { seeds: [{ id: null, teams: [null, null] }] },
-  ];
+  // Add the first round
+  rounds.push({ seeds });
+
+  // Calculate the total number of rounds needed
+  let roundsNeeded = Math.ceil(Math.log2(athleteCount));
+
+  // Generate subsequent rounds by halving the seeds each time
+  for (let i = 1; i < roundsNeeded; i++) {
+    seeds = Array.from({ length: seeds.length / 2 }, () => ({
+      id: null,
+      teams: [null, null],
+    }));
+    rounds.push({ seeds });
+  }
+
+  return rounds;
 };
 
 const DraggableAthlete = ({ athlete }) => {
