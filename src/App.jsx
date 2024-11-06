@@ -11,9 +11,7 @@ const generateRounds = (athleteCount) => {
   }));
 
   return [
-    {
-      seeds: initialSeeds,
-    },
+    { seeds: initialSeeds },
     {
       seeds: Array(initialSeeds.length / 2).fill({
         id: null,
@@ -26,16 +24,14 @@ const generateRounds = (athleteCount) => {
         teams: [null, null],
       }),
     },
-    {
-      seeds: [{ id: null, teams: [null, null] }],
-    },
+    { seeds: [{ id: null, teams: [null, null] }] },
   ];
 };
 
 const DraggableAthlete = ({ athlete }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "ATHLETE",
-    item: { name: athlete },
+    item: { name: athlete, fromPool: true },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -82,7 +78,7 @@ const App = () => {
         target.teamIndex
       ] = { name: athlete };
       setRounds(updatedRounds);
-      setAthletePool(athletePool.filter((a) => a !== athlete));
+      setAthletePool((prevPool) => prevPool.filter((a) => a !== athlete));
     }
   };
 
