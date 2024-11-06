@@ -1,0 +1,9 @@
+.DraggableTeam-team {
+  padding: 8px;
+  margin: 4px;
+  color: white;
+  text-align: center;
+  border: 1px solid #ddd;
+  min-width: 200px;
+  height: 30px;
+}

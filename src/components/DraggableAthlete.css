@@ -1,0 +1,10 @@
+.DraggableAthlete-athlete {
+  padding: 8px;
+  margin: 4px;
+  background-color: lightgreen;
+  cursor: move;
+  text-align: center;
+  border: 1px solid #ddd;
+  width: 200px;
+  height: 30px;
+}

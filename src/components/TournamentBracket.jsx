@@ -1,4 +1,3 @@
-import React from "react";
 import { Bracket } from "react-brackets";
 import DraggableTeam from "./DraggableTeam";
 
